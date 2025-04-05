@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 
-// Sample data for charts
 const moneyFlowData = [{
   name: "Jan",
   income: 5000,
@@ -138,12 +137,12 @@ const chartConfig = {
     }
   }
 };
+
 const Dashboard = () => {
   const [timeFilter, setTimeFilter] = useState("30days");
   const [menuOpen, setMenuOpen] = useState(false);
   const [dismissUsedSpace, setDismissUsedSpace] = useState(false);
   return <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
-      {/* Mobile menu toggle */}
       <div className="md:hidden p-4 flex justify-between items-center bg-white border-b border-gray-200">
         <div className="flex items-center">
           <span className="text-blue-600 font-bold text-2xl">PRINCE</span>
@@ -156,7 +155,6 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
       <div className={`${menuOpen ? 'block' : 'hidden'} md:block w-full md:w-72 bg-white border-r border-gray-200 fixed md:static top-16 left-0 h-screen md:h-auto z-50 flex flex-col`}>
         <div className="p-6 flex-1">
           <div className="flex items-center mb-10 justify-center md:justify-start">
@@ -164,14 +162,12 @@ const Dashboard = () => {
           </div>
           
           <nav className="space-y-2">
-            {/* Top menu items */}
             <SidebarItem icon={<Home size={20} />} label="Dashboard" active />
             <SidebarItem icon={<BarChart2 size={20} />} label="Report" />
             <SidebarItem icon={<Repeat size={20} />} label="Transaction" />
             <SidebarItem icon={<User size={20} />} label="Account" />
             <SidebarItem icon={<CreditCard size={20} />} label="Card" />
             
-            {/* Bottom menu items - added spacing */}
             <div className="mt-10">
               <SidebarItem icon={<MessageSquare size={20} />} label="Support" />
               <SidebarItem icon={<Settings size={20} />} label="Settings" />
@@ -179,11 +175,9 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        {/* Footer Section - Moved to the bottom with flex */}
-        <div className="mt-auto mx-0 my-[240px]">
-          {/* Used Space Section */}
-          {!dismissUsedSpace && <div className="px-6 mb-4">
-              <div className="bg-blue-600 rounded-xl p-4 text-white relative my-[4px]">
+        <div className="mt-auto p-6">
+          {!dismissUsedSpace && <div className="mb-4">
+              <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
                   <X size={16} />
                 </button>
@@ -203,28 +197,27 @@ const Dashboard = () => {
               </div>
             </div>}
           
-          {/* User Profile Section */}
-          <div className="border-t border-gray-200 p-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <Avatar className="h-10 w-10 border-2 border-gray-200">
-                <AvatarImage src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" alt="Profile" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-800">Upgrade plan</p>
-                <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
+          <div className="border-t border-gray-200 pt-4 mt-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Avatar className="h-10 w-10 border-2 border-gray-200">
+                  <AvatarImage src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" alt="Profile" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-800">John Doe</p>
+                  <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
+                </div>
               </div>
+              <button className="text-gray-500 hover:text-gray-700 transition-colors">
+                <LogOut size={18} />
+              </button>
             </div>
-            <button className="text-gray-500 hover:text-gray-700 transition-colors">
-              <LogOut size={18} />
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
-        {/* Header */}
         <header className="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="relative w-full md:w-64">
@@ -252,14 +245,12 @@ const Dashboard = () => {
           </div>
         </header>
         
-        {/* Content */}
         <main className="p-4 md:p-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-800">Hello, John! 👋</h1>
             <p className="text-gray-500">Welcome back to your dashboard</p>
           </div>
           
-          {/* Date and time filters */}
           <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
             <div className="flex space-x-2 overflow-x-auto pb-2 whitespace-nowrap">
               {["12months", "30days", "7days", "24hours", "custom"].map(filter => <button key={filter} onClick={() => setTimeFilter(filter)} className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap ${timeFilter === filter ? "bg-blue-100 text-blue-700 font-medium" : "bg-white text-gray-600 hover:bg-gray-100 transition-colors"}`}>
@@ -302,7 +293,6 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
-            {/* Updated Purple Card with Mastercard logo */}
             <Card className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="bg-gradient-to-br from-purple-600 to-purple-500 text-white p-6 rounded-t-lg relative">
                 <div className="flex justify-between items-start">
@@ -316,7 +306,6 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                {/* Card wave pattern - subtle gradient overlay */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40"></div>
                 
                 <div className="mt-14 flex justify-between items-center pt-4">
@@ -333,7 +322,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Income */}
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div>
@@ -368,7 +356,6 @@ const Dashboard = () => {
               </CardFooter>
             </Card>
 
-            {/* Expenses */}
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div>
@@ -405,7 +392,6 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            {/* Money Flow - Improved Responsiveness */}
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex justify-between items-center">
                 <h3 className="font-medium">Money Flow</h3>
@@ -447,7 +433,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Recent Transactions */}
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex justify-between items-center">
                 <h3 className="font-medium">Recent Transactions</h3>
@@ -489,7 +474,6 @@ const Dashboard = () => {
     </div>;
 };
 
-// SidebarItem Component
 const SidebarItem = ({
   icon,
   label,
@@ -502,4 +486,5 @@ const SidebarItem = ({
       <span className={`${active ? 'font-medium' : ''}`}>{label}</span>
     </a>;
 };
+
 export default Dashboard;
