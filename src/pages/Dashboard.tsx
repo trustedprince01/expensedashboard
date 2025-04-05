@@ -14,7 +14,8 @@ import {
   Repeat, 
   User, 
   LifeBuoy, 
-  Settings
+  Settings,
+  Calendar
 } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import {
@@ -33,6 +34,15 @@ import {
   ResponsiveContainer,
   Tooltip
 } from "recharts";
+import { Input } from "@/components/ui/input";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Sample data for charts
 const moneyFlowData = [
@@ -113,29 +123,50 @@ const chartConfig = {
   income: {
     label: "Income",
     theme: {
-      light: "#8B5CF6",
-      dark: "#8B5CF6",
+      light: "#1EAEDB",
+      dark: "#1EAEDB",
     },
   },
   expenses: {
     label: "Expenses",
     theme: {
-      light: "#E879F9",
-      dark: "#E879F9",
+      light: "#33C3F0",
+      dark: "#33C3F0",
     },
   },
 };
 
 const Dashboard = () => {
   const [timeFilter, setTimeFilter] = useState("30days");
+  const [menuOpen, setMenuOpen] = useState(false);
   
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+      {/* Mobile menu toggle */}
+      <div className="md:hidden p-4 flex justify-between items-center bg-white border-b border-gray-200">
+        <div className="flex items-center">
+          <span className="text-blue-600 font-bold text-2xl">PRINCE</span>
+          <span className="text-gray-800 font-bold text-2xl">PAY</span>
+        </div>
+        <button 
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {menuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-72 bg-white border-r border-gray-200 hidden md:block">
+      <div className={`${menuOpen ? 'block' : 'hidden'} md:block w-full md:w-72 bg-white border-r border-gray-200 fixed md:static top-16 left-0 h-screen md:h-auto z-50`}>
         <div className="p-6">
-          <div className="flex items-center mb-12">
-            <span className="text-purple-600 font-bold text-2xl">PRINCE</span>
+          <div className="flex items-center mb-12 hidden md:flex">
+            <span className="text-blue-600 font-bold text-2xl">PRINCE</span>
             <span className="text-gray-800 font-bold text-2xl">PAY</span>
           </div>
           
@@ -151,10 +182,10 @@ const Dashboard = () => {
         </div>
         
         <div className="mt-auto p-6">
-          <div className="bg-gradient-to-r from-purple-500 to-purple-400 rounded-xl p-4 text-white">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-400 rounded-xl p-4 text-white">
             <h3 className="font-medium text-sm">Need Help?</h3>
             <p className="text-xs mt-1 mb-3 opacity-80">Contact our 24/7 customer support</p>
-            <button className="bg-white text-purple-600 text-xs rounded-lg px-4 py-2 font-medium">
+            <button className="bg-white text-blue-600 text-xs rounded-lg px-4 py-2 font-medium hover:bg-blue-50 transition-colors">
               Contact Us
             </button>
           </div>
@@ -164,28 +195,30 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 py-4 px-6">
-          <div className="flex items-center justify-between">
-            <div className="relative">
+        <header className="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-10">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="relative w-full md:w-64">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <input
+              <Input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-purple-500 w-64"
+                className="pl-10 pr-4 py-2 bg-gray-100 focus:ring-blue-500 w-full"
               />
             </div>
             
-            <div className="flex items-center space-x-4">
-              <button className="relative p-2 rounded-full hover:bg-gray-100">
+            <div className="flex items-center space-x-4 justify-between md:justify-end w-full">
+              <button className="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
                 <Bell className="h-5 w-5 text-gray-600" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>
               <div className="flex items-center">
-                <img
-                  src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png"
-                  alt="Profile"
-                  className="h-10 w-10 rounded-full object-cover"
-                />
+                <Avatar className="h-10 w-10">
+                  <AvatarImage 
+                    src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
+                    alt="Profile" 
+                  />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
                 <div className="ml-3 hidden md:block">
                   <p className="text-sm font-medium text-gray-800">John Doe</p>
                   <p className="text-xs text-gray-500">Premium User</p>
@@ -197,35 +230,70 @@ const Dashboard = () => {
         </header>
         
         {/* Content */}
-        <main className="p-6">
+        <main className="p-4 md:p-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-800">Hello, John! 👋</h1>
             <p className="text-gray-500">Welcome back to your dashboard</p>
           </div>
           
-          {/* Time filters */}
-          <div className="flex space-x-4 mb-6 overflow-x-auto pb-2">
-            {["12months", "30days", "7days", "24hours", "custom"].map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setTimeFilter(filter)}
-                className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap ${
-                  timeFilter === filter
-                    ? "bg-purple-100 text-purple-700 font-medium"
-                    : "bg-white text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                {filter === "12months" ? "12 months" : 
-                 filter === "30days" ? "30 days" : 
-                 filter === "7days" ? "7 days" : 
-                 filter === "24hours" ? "24 hours" : "Custom"}
-              </button>
-            ))}
+          {/* Date and time filters */}
+          <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+            <div className="flex space-x-2 overflow-x-auto pb-2 whitespace-nowrap">
+              {["12months", "30days", "7days", "24hours", "custom"].map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setTimeFilter(filter)}
+                  className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap ${
+                    timeFilter === filter
+                      ? "bg-blue-100 text-blue-700 font-medium"
+                      : "bg-white text-gray-600 hover:bg-gray-100 transition-colors"
+                  }`}
+                >
+                  {filter === "12months" ? "12 months" : 
+                   filter === "30days" ? "30 days" : 
+                   filter === "7days" ? "7 days" : 
+                   filter === "24hours" ? "24 hours" : "Custom"}
+                </button>
+              ))}
+            </div>
+            
+            <div className="flex gap-2">
+              <div className="w-32 sm:w-40">
+                <Select>
+                  <SelectTrigger className="bg-white">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-gray-500" />
+                      <SelectValue placeholder="Select Date" />
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="today">Today</SelectItem>
+                    <SelectItem value="yesterday">Yesterday</SelectItem>
+                    <SelectItem value="thisWeek">This week</SelectItem>
+                    <SelectItem value="thisMonth">This month</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="w-32 sm:w-40">
+                <Select>
+                  <SelectTrigger className="bg-white">
+                    <SelectValue placeholder="Filter By" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="income">Income</SelectItem>
+                    <SelectItem value="expense">Expense</SelectItem>
+                    <SelectItem value="transfer">Transfer</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
             {/* Card */}
-            <Card className="bg-gradient-to-r from-purple-700 to-purple-500 text-white">
+            <Card className="bg-gradient-to-r from-blue-700 to-blue-500 text-white hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-between">
                   <div>
@@ -261,7 +329,7 @@ const Dashboard = () => {
             </Card>
 
             {/* Income */}
-            <Card>
+            <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Total Income</h3>
@@ -277,14 +345,14 @@ const Dashboard = () => {
                     <AreaChart data={incomeData}>
                       <defs>
                         <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.4} />
-                          <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0} />
+                          <stop offset="0%" stopColor="#1EAEDB" stopOpacity={0.4} />
+                          <stop offset="100%" stopColor="#1EAEDB" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <Area 
                         type="monotone" 
                         dataKey="value" 
-                        stroke="#8B5CF6" 
+                        stroke="#1EAEDB" 
                         fillOpacity={1}
                         fill="url(#incomeGradient)" 
                       />
@@ -302,7 +370,7 @@ const Dashboard = () => {
             </Card>
 
             {/* Expenses */}
-            <Card>
+            <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Total Expenses</h3>
@@ -318,14 +386,14 @@ const Dashboard = () => {
                     <AreaChart data={expensesData}>
                       <defs>
                         <linearGradient id="expensesGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#E879F9" stopOpacity={0.4} />
-                          <stop offset="100%" stopColor="#E879F9" stopOpacity={0} />
+                          <stop offset="0%" stopColor="#33C3F0" stopOpacity={0.4} />
+                          <stop offset="100%" stopColor="#33C3F0" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <Area 
                         type="monotone" 
                         dataKey="value" 
-                        stroke="#E879F9" 
+                        stroke="#33C3F0" 
                         fillOpacity={1}
                         fill="url(#expensesGradient)" 
                       />
@@ -345,16 +413,16 @@ const Dashboard = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Money Flow */}
-            <Card>
+            <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex justify-between items-center">
                 <h3 className="font-medium">Money Flow</h3>
                 <div className="flex items-center space-x-2">
                   <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-purple-500 mr-1"></div>
+                    <div className="w-3 h-3 rounded-full bg-blue-500 mr-1"></div>
                     <span className="text-xs text-gray-600">Income</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-pink-500 mr-1"></div>
+                    <div className="w-3 h-3 rounded-full bg-blue-300 mr-1"></div>
                     <span className="text-xs text-gray-600">Expenses</span>
                   </div>
                 </div>
@@ -366,18 +434,18 @@ const Dashboard = () => {
                     <YAxis axisLine={false} tickLine={false} />
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
                     <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="income" name="income" fill="var(--color-income)" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="expenses" name="expenses" fill="var(--color-expenses)" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="income" name="income" fill="#1EAEDB" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="expenses" name="expenses" fill="#33C3F0" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ChartContainer>
               </CardContent>
             </Card>
 
             {/* Recent Transactions */}
-            <Card>
+            <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex justify-between items-center">
                 <h3 className="font-medium">Recent Transactions</h3>
-                <button className="text-purple-600 text-sm hover:text-purple-700">View All</button>
+                <button className="text-blue-600 text-sm hover:text-blue-700 transition-colors">View All</button>
               </CardHeader>
               <CardContent className="px-0">
                 <div className="divide-y divide-gray-100">
@@ -389,7 +457,7 @@ const Dashboard = () => {
                             w-10 h-10 rounded-lg flex items-center justify-center text-lg
                             ${tx.type === 'income' ? 'bg-green-100' : 
                               tx.type === 'shopping' ? 'bg-blue-100' : 
-                              tx.type === 'subscription' ? 'bg-purple-100' :
+                              tx.type === 'subscription' ? 'bg-blue-100' :
                               tx.type === 'food' ? 'bg-yellow-100' : 'bg-gray-100'}
                           `}>
                             {tx.icon}
@@ -408,7 +476,7 @@ const Dashboard = () => {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-center">
-                <button className="text-purple-600 flex items-center text-sm hover:text-purple-700">
+                <button className="text-blue-600 flex items-center text-sm hover:text-blue-700 transition-colors">
                   <span>View all transactions</span> 
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </button>
@@ -427,14 +495,14 @@ const SidebarItem = ({ icon, label, active = false }) => {
     <a
       href="#"
       className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
-        active ? 'bg-purple-100 text-purple-700' : 'text-gray-500 hover:bg-gray-100'
+        active ? 'bg-blue-100 text-blue-700' : 'text-gray-500 hover:bg-gray-100'
       }`}
     >
-      <div className={`mr-3 ${active ? 'text-purple-700' : 'text-gray-500'}`}>
+      <div className={`mr-3 ${active ? 'text-blue-700' : 'text-gray-500'}`}>
         {icon}
       </div>
       <span className={active ? 'font-medium' : ''}>{label}</span>
-      {active && <div className="ml-auto w-1.5 h-6 bg-purple-600 rounded-full"></div>}
+      {active && <div className="ml-auto w-1.5 h-6 bg-blue-600 rounded-full"></div>}
     </a>
   );
 };
