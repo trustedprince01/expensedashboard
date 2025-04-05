@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-
 const moneyFlowData = [{
   name: "Jan",
   income: 5000,
@@ -137,7 +136,6 @@ const chartConfig = {
     }
   }
 };
-
 const Dashboard = () => {
   const [timeFilter, setTimeFilter] = useState("30days");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -175,7 +173,7 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        <div className="mt-auto p-6">
+        <div className="mt-auto p-6 py-[240px] px-[24px] mx-0 my-[140px]">
           {!dismissUsedSpace && <div className="mb-4">
               <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
@@ -473,7 +471,6 @@ const Dashboard = () => {
       </div>
     </div>;
 };
-
 const SidebarItem = ({
   icon,
   label,
@@ -486,5 +483,4 @@ const SidebarItem = ({
       <span className={`${active ? 'font-medium' : ''}`}>{label}</span>
     </a>;
 };
-
 export default Dashboard;
