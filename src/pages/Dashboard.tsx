@@ -304,20 +304,14 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40 my-0"></div>
                 
                 <div className="mt-14 flex justify-between items-center pt-4">
                   <p className="font-medium tracking-wider text-white text-lg">5282 3456 7890 1289</p>
                   <p className="text-sm font-light">09/25</p>
                 </div>
               </div>
-              <CardContent className="bg-white p-4 flex justify-between items-center">
-                <div>
-                  <p className="text-xs text-gray-500">Card Holder</p>
-                  <p className="font-medium">John Doe</p>
-                </div>
-                <img src="public/lovable-uploads/9b571b79-3273-490c-af7b-d76ad0871ec2.png" alt="Mastercard" className="h-8" />
-              </CardContent>
+              
             </Card>
 
             <Card className="hover:shadow-md transition-shadow">
