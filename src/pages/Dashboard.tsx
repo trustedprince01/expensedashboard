@@ -304,7 +304,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40 my-0"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40 py-0 my-0 px-0"></div>
                 
                 <div className="mt-14 flex justify-between items-center pt-4">
                   <p className="font-medium tracking-wider text-white text-lg">5282 3456 7890 1289</p>
