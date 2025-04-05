@@ -189,51 +189,54 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        {/* Used Space Section */}
-        {!dismissUsedSpace && (
-          <div className="px-6 mb-4">
-            <div className="bg-blue-600 rounded-xl p-4 text-white relative">
-              <button 
-                onClick={() => setDismissUsedSpace(true)}
-                className="absolute top-3 right-3 text-white/80 hover:text-white"
-              >
-                <X size={16} />
-              </button>
-              <h3 className="font-semibold text-lg mb-1">Used Space</h3>
-              <p className="text-sm mb-2 text-blue-100">
-                Your team have used 80% of your available space. want more?
-              </p>
-              <Progress value={80} className="h-1.5 bg-blue-400/50" />
-              <div className="flex justify-between mt-3">
-                <button className="text-sm text-blue-200 hover:text-white transition-colors">
-                  Dismiss
+        {/* Footer Section - Moved to the bottom with flex */}
+        <div className="mt-auto">
+          {/* Used Space Section */}
+          {!dismissUsedSpace && (
+            <div className="px-6 mb-4">
+              <div className="bg-blue-600 rounded-xl p-4 text-white relative">
+                <button 
+                  onClick={() => setDismissUsedSpace(true)}
+                  className="absolute top-3 right-3 text-white/80 hover:text-white"
+                >
+                  <X size={16} />
                 </button>
-                <button className="text-sm font-medium hover:underline">
-                  Upgrade plan
-                </button>
+                <h3 className="font-semibold text-lg mb-1">Used Space</h3>
+                <p className="text-sm mb-2 text-blue-100">
+                  Your team have used 80% of your available space. want more?
+                </p>
+                <Progress value={80} className="h-1.5 bg-blue-400/50" />
+                <div className="flex justify-between mt-3">
+                  <button className="text-sm text-blue-200 hover:text-white transition-colors">
+                    Dismiss
+                  </button>
+                  <button className="text-sm font-medium hover:underline">
+                    Upgrade plan
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        
-        {/* User Profile Section */}
-        <div className="border-t border-gray-200 p-4 flex items-center justify-between">
-          <div className="flex items-center">
-            <Avatar className="h-10 w-10 border-2 border-gray-200">
-              <AvatarImage 
-                src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
-                alt="Profile" 
-              />
-              <AvatarFallback>JD</AvatarFallback>
-            </Avatar>
-            <div className="ml-3">
-              <p className="text-sm font-medium text-gray-800">Upgrade plan</p>
-              <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
+          )}
+          
+          {/* User Profile Section */}
+          <div className="border-t border-gray-200 p-4 flex items-center justify-between">
+            <div className="flex items-center">
+              <Avatar className="h-10 w-10 border-2 border-gray-200">
+                <AvatarImage 
+                  src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
+                  alt="Profile" 
+                />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-gray-800">Upgrade plan</p>
+                <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
+              </div>
             </div>
+            <button className="text-gray-500 hover:text-gray-700 transition-colors">
+              <LogOut size={18} />
+            </button>
           </div>
-          <button className="text-gray-500 hover:text-gray-700 transition-colors">
-            <LogOut size={18} />
-          </button>
         </div>
       </div>
 
@@ -337,39 +340,38 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
-            {/* Card */}
-            <Card className="bg-gradient-to-r from-blue-700 to-blue-500 text-white hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex justify-between">
+            {/* Updated Purple Card with Mastercard logo */}
+            <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="bg-gradient-to-br from-purple-600 to-purple-500 text-white p-6 rounded-t-lg relative">
+                <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-sm opacity-80">Balance</p>
-                    <h2 className="text-2xl font-bold mt-1">$24,562.00</h2>
+                    <p className="text-sm opacity-80">Current Balance</p>
+                    <h2 className="text-4xl font-bold mt-2">$5,750.20</h2>
                   </div>
-                  <div className="flex space-x-1">
-                    <div className="bg-white/30 h-2 w-2 rounded-full"></div>
-                    <div className="bg-white/30 h-2 w-2 rounded-full"></div>
-                    <div className="bg-white h-2 w-2 rounded-full"></div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between mb-5 mt-4">
-                  <div className="opacity-80">
-                    <p className="text-xs font-light">Card Holder</p>
-                    <p className="text-sm font-medium">John Doe</p>
-                  </div>
-                  <div className="opacity-80">
-                    <p className="text-xs font-light">Valid Thru</p>
-                    <p className="text-sm font-medium">12/24</p>
+                  <div className="flex -space-x-2">
+                    <div className="bg-red-500 rounded-full w-8 h-8 opacity-90"></div>
+                    <div className="bg-yellow-500 rounded-full w-8 h-8 opacity-90"></div>
                   </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <p className="font-medium tracking-wider">**** **** **** 4562</p>
-                  <div className="flex gap-1">
-                    <div className="bg-red-500 rounded-full w-6 h-6 opacity-70"></div>
-                    <div className="bg-yellow-500 rounded-full w-6 h-6 opacity-70 -ml-3"></div>
-                  </div>
+                
+                {/* Card wave pattern - subtle gradient overlay */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40"></div>
+                
+                <div className="mt-14 flex justify-between items-center pt-4">
+                  <p className="font-medium tracking-wider text-white text-lg">5282 3456 7890 1289</p>
+                  <p className="text-sm font-light">09/25</p>
                 </div>
+              </div>
+              <CardContent className="bg-white p-4 flex justify-between items-center">
+                <div>
+                  <p className="text-xs text-gray-500">Card Holder</p>
+                  <p className="font-medium">John Doe</p>
+                </div>
+                <img 
+                  src="public/lovable-uploads/9b571b79-3273-490c-af7b-d76ad0871ec2.png" 
+                  alt="Mastercard" 
+                  className="h-8"
+                />
               </CardContent>
             </Card>
 
