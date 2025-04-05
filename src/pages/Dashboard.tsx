@@ -1,167 +1,157 @@
-
 import { useState } from "react";
-import { 
-  Search, 
-  Bell, 
-  ChevronDown, 
-  CreditCard, 
-  Wallet, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  ChevronRight, 
-  Home, 
-  BarChart2, 
-  Repeat, 
-  User, 
-  MessageSquare, 
-  Settings,
-  Calendar,
-  LogOut,
-  X
-} from "lucide-react";
+import { Search, Bell, ChevronDown, CreditCard, Wallet, ArrowUpRight, ArrowDownLeft, ChevronRight, Home, BarChart2, Repeat, User, MessageSquare, Settings, Calendar, LogOut, X } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from "@/components/ui/chart";
-import {
-  AreaChart,
-  Area,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip
-} from "recharts";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
 import { Input } from "@/components/ui/input";
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 
 // Sample data for charts
-const moneyFlowData = [
-  { name: "Jan", income: 5000, expenses: 3000 },
-  { name: "Feb", income: 6000, expenses: 4000 },
-  { name: "Mar", income: 5500, expenses: 3500 },
-  { name: "Apr", income: 7000, expenses: 4500 },
-  { name: "May", income: 6500, expenses: 3800 },
-  { name: "Jun", income: 8000, expenses: 5000 },
-  { name: "Jul", income: 7500, expenses: 4200 },
-  { name: "Aug", income: 9000, expenses: 5500 }
-];
-
-const incomeData = [
-  { name: "Mon", value: 1200 },
-  { name: "Tue", value: 900 },
-  { name: "Wed", value: 1500 },
-  { name: "Thu", value: 800 },
-  { name: "Fri", value: 1300 },
-  { name: "Sat", value: 700 },
-  { name: "Sun", value: 500 }
-];
-
-const expensesData = [
-  { name: "Mon", value: 800 },
-  { name: "Tue", value: 600 },
-  { name: "Wed", value: 900 },
-  { name: "Thu", value: 500 },
-  { name: "Fri", value: 700 },
-  { name: "Sat", value: 400 },
-  { name: "Sun", value: 300 }
-];
-
-const transactions = [
-  { 
-    id: 1, 
-    name: "Spotify Premium", 
-    date: "18 Jul, 2023", 
-    amount: "-$11.99", 
-    type: "subscription", 
-    icon: "🎵"
-  },
-  { 
-    id: 2, 
-    name: "Amazon Purchase", 
-    date: "17 Jul, 2023", 
-    amount: "-$238.50", 
-    type: "shopping", 
-    icon: "🛒" 
-  },
-  { 
-    id: 3, 
-    name: "Salary Deposit", 
-    date: "15 Jul, 2023", 
-    amount: "+$4,880.00", 
-    type: "income", 
-    icon: "💼" 
-  },
-  { 
-    id: 4, 
-    name: "Restaurant Bill", 
-    date: "14 Jul, 2023", 
-    amount: "-$56.25", 
-    type: "food", 
-    icon: "🍽️" 
-  },
-  { 
-    id: 5, 
-    name: "Electricity Bill", 
-    date: "12 Jul, 2023", 
-    amount: "-$85.30", 
-    type: "utility", 
-    icon: "⚡" 
-  }
-];
-
+const moneyFlowData = [{
+  name: "Jan",
+  income: 5000,
+  expenses: 3000
+}, {
+  name: "Feb",
+  income: 6000,
+  expenses: 4000
+}, {
+  name: "Mar",
+  income: 5500,
+  expenses: 3500
+}, {
+  name: "Apr",
+  income: 7000,
+  expenses: 4500
+}, {
+  name: "May",
+  income: 6500,
+  expenses: 3800
+}, {
+  name: "Jun",
+  income: 8000,
+  expenses: 5000
+}, {
+  name: "Jul",
+  income: 7500,
+  expenses: 4200
+}, {
+  name: "Aug",
+  income: 9000,
+  expenses: 5500
+}];
+const incomeData = [{
+  name: "Mon",
+  value: 1200
+}, {
+  name: "Tue",
+  value: 900
+}, {
+  name: "Wed",
+  value: 1500
+}, {
+  name: "Thu",
+  value: 800
+}, {
+  name: "Fri",
+  value: 1300
+}, {
+  name: "Sat",
+  value: 700
+}, {
+  name: "Sun",
+  value: 500
+}];
+const expensesData = [{
+  name: "Mon",
+  value: 800
+}, {
+  name: "Tue",
+  value: 600
+}, {
+  name: "Wed",
+  value: 900
+}, {
+  name: "Thu",
+  value: 500
+}, {
+  name: "Fri",
+  value: 700
+}, {
+  name: "Sat",
+  value: 400
+}, {
+  name: "Sun",
+  value: 300
+}];
+const transactions = [{
+  id: 1,
+  name: "Spotify Premium",
+  date: "18 Jul, 2023",
+  amount: "-$11.99",
+  type: "subscription",
+  icon: "🎵"
+}, {
+  id: 2,
+  name: "Amazon Purchase",
+  date: "17 Jul, 2023",
+  amount: "-$238.50",
+  type: "shopping",
+  icon: "🛒"
+}, {
+  id: 3,
+  name: "Salary Deposit",
+  date: "15 Jul, 2023",
+  amount: "+$4,880.00",
+  type: "income",
+  icon: "💼"
+}, {
+  id: 4,
+  name: "Restaurant Bill",
+  date: "14 Jul, 2023",
+  amount: "-$56.25",
+  type: "food",
+  icon: "🍽️"
+}, {
+  id: 5,
+  name: "Electricity Bill",
+  date: "12 Jul, 2023",
+  amount: "-$85.30",
+  type: "utility",
+  icon: "⚡"
+}];
 const chartConfig = {
   income: {
     label: "Income",
     theme: {
       light: "#1EAEDB",
-      dark: "#1EAEDB",
-    },
+      dark: "#1EAEDB"
+    }
   },
   expenses: {
     label: "Expenses",
     theme: {
       light: "#33C3F0",
-      dark: "#33C3F0",
-    },
-  },
+      dark: "#33C3F0"
+    }
+  }
 };
-
 const Dashboard = () => {
   const [timeFilter, setTimeFilter] = useState("30days");
   const [menuOpen, setMenuOpen] = useState(false);
   const [dismissUsedSpace, setDismissUsedSpace] = useState(false);
-  
-  return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+  return <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       {/* Mobile menu toggle */}
       <div className="md:hidden p-4 flex justify-between items-center bg-white border-b border-gray-200">
         <div className="flex items-center">
           <span className="text-blue-600 font-bold text-2xl">PRINCE</span>
           <span className="text-gray-800 font-bold text-2xl">PAY</span>
         </div>
-        <button 
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
+        <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
+            {menuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
           </svg>
         </button>
       </div>
@@ -190,15 +180,11 @@ const Dashboard = () => {
         </div>
         
         {/* Footer Section - Moved to the bottom with flex */}
-        <div className="mt-auto">
+        <div className="mt-auto mx-0 my-[240px]">
           {/* Used Space Section */}
-          {!dismissUsedSpace && (
-            <div className="px-6 mb-4">
-              <div className="bg-blue-600 rounded-xl p-4 text-white relative">
-                <button 
-                  onClick={() => setDismissUsedSpace(true)}
-                  className="absolute top-3 right-3 text-white/80 hover:text-white"
-                >
+          {!dismissUsedSpace && <div className="px-6 mb-4">
+              <div className="bg-blue-600 rounded-xl p-4 text-white relative my-[4px]">
+                <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
                   <X size={16} />
                 </button>
                 <h3 className="font-semibold text-lg mb-1">Used Space</h3>
@@ -215,17 +201,13 @@ const Dashboard = () => {
                   </button>
                 </div>
               </div>
-            </div>
-          )}
+            </div>}
           
           {/* User Profile Section */}
           <div className="border-t border-gray-200 p-4 flex items-center justify-between">
             <div className="flex items-center">
               <Avatar className="h-10 w-10 border-2 border-gray-200">
-                <AvatarImage 
-                  src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
-                  alt="Profile" 
-                />
+                <AvatarImage src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" alt="Profile" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <div className="ml-3">
@@ -247,11 +229,7 @@ const Dashboard = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="relative w-full md:w-64">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Search"
-                className="pl-10 pr-4 py-2 bg-gray-100 focus:ring-blue-500 w-full"
-              />
+              <Input type="text" placeholder="Search" className="pl-10 pr-4 py-2 bg-gray-100 focus:ring-blue-500 w-full" />
             </div>
             
             <div className="flex items-center space-x-4 justify-between md:justify-end w-full">
@@ -261,10 +239,7 @@ const Dashboard = () => {
               </button>
               <div className="flex items-center">
                 <Avatar className="h-10 w-10 border-2 border-gray-200">
-                  <AvatarImage 
-                    src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
-                    alt="Profile" 
-                  />
+                  <AvatarImage src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" alt="Profile" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="ml-3 hidden md:block">
@@ -287,22 +262,9 @@ const Dashboard = () => {
           {/* Date and time filters */}
           <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
             <div className="flex space-x-2 overflow-x-auto pb-2 whitespace-nowrap">
-              {["12months", "30days", "7days", "24hours", "custom"].map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setTimeFilter(filter)}
-                  className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap ${
-                    timeFilter === filter
-                      ? "bg-blue-100 text-blue-700 font-medium"
-                      : "bg-white text-gray-600 hover:bg-gray-100 transition-colors"
-                  }`}
-                >
-                  {filter === "12months" ? "12 months" : 
-                   filter === "30days" ? "30 days" : 
-                   filter === "7days" ? "7 days" : 
-                   filter === "24hours" ? "24 hours" : "Custom"}
-                </button>
-              ))}
+              {["12months", "30days", "7days", "24hours", "custom"].map(filter => <button key={filter} onClick={() => setTimeFilter(filter)} className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap ${timeFilter === filter ? "bg-blue-100 text-blue-700 font-medium" : "bg-white text-gray-600 hover:bg-gray-100 transition-colors"}`}>
+                  {filter === "12months" ? "12 months" : filter === "30days" ? "30 days" : filter === "7days" ? "7 days" : filter === "24hours" ? "24 hours" : "Custom"}
+                </button>)}
             </div>
             
             <div className="flex gap-2">
@@ -367,11 +329,7 @@ const Dashboard = () => {
                   <p className="text-xs text-gray-500">Card Holder</p>
                   <p className="font-medium">John Doe</p>
                 </div>
-                <img 
-                  src="public/lovable-uploads/9b571b79-3273-490c-af7b-d76ad0871ec2.png" 
-                  alt="Mastercard" 
-                  className="h-8"
-                />
+                <img src="public/lovable-uploads/9b571b79-3273-490c-af7b-d76ad0871ec2.png" alt="Mastercard" className="h-8" />
               </CardContent>
             </Card>
 
@@ -396,13 +354,7 @@ const Dashboard = () => {
                           <stop offset="100%" stopColor="#1EAEDB" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <Area 
-                        type="monotone" 
-                        dataKey="value" 
-                        stroke="#1EAEDB" 
-                        fillOpacity={1}
-                        fill="url(#incomeGradient)" 
-                      />
+                      <Area type="monotone" dataKey="value" stroke="#1EAEDB" fillOpacity={1} fill="url(#incomeGradient)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -437,13 +389,7 @@ const Dashboard = () => {
                           <stop offset="100%" stopColor="#33C3F0" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <Area 
-                        type="monotone" 
-                        dataKey="value" 
-                        stroke="#33C3F0" 
-                        fillOpacity={1}
-                        fill="url(#expensesGradient)" 
-                      />
+                      <Area type="monotone" dataKey="value" stroke="#33C3F0" fillOpacity={1} fill="url(#expensesGradient)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -476,42 +422,26 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent className="h-[300px] sm:h-[350px] md:h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={moneyFlowData} margin={{ top: 20, right: 10, left: 0, bottom: 5 }}>
+                  <BarChart data={moneyFlowData} margin={{
+                  top: 20,
+                  right: 10,
+                  left: 0,
+                  bottom: 5
+                }}>
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                    <XAxis 
-                      dataKey="name" 
-                      axisLine={false} 
-                      tickLine={false}
-                      tick={{ fontSize: 12 }}
-                      dy={10}
-                    />
-                    <YAxis 
-                      axisLine={false} 
-                      tickLine={false}
-                      tick={{ fontSize: 12 }}
-                      width={40}
-                    />
-                    <Tooltip 
-                      contentStyle={{ 
-                        borderRadius: '8px', 
-                        border: '1px solid #f0f0f0',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
-                      }} 
-                    />
-                    <Bar 
-                      dataKey="income" 
-                      name="Income" 
-                      fill="#1EAEDB" 
-                      radius={[4, 4, 0, 0]}
-                      barSize={window.innerWidth < 640 ? 15 : 30}
-                    />
-                    <Bar 
-                      dataKey="expenses" 
-                      name="Expenses" 
-                      fill="#33C3F0" 
-                      radius={[4, 4, 0, 0]}
-                      barSize={window.innerWidth < 640 ? 15 : 30}
-                    />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{
+                    fontSize: 12
+                  }} dy={10} />
+                    <YAxis axisLine={false} tickLine={false} tick={{
+                    fontSize: 12
+                  }} width={40} />
+                    <Tooltip contentStyle={{
+                    borderRadius: '8px',
+                    border: '1px solid #f0f0f0',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+                  }} />
+                    <Bar dataKey="income" name="Income" fill="#1EAEDB" radius={[4, 4, 0, 0]} barSize={window.innerWidth < 640 ? 15 : 30} />
+                    <Bar dataKey="expenses" name="Expenses" fill="#33C3F0" radius={[4, 4, 0, 0]} barSize={window.innerWidth < 640 ? 15 : 30} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -525,16 +455,12 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent className="px-0">
                 <div className="divide-y divide-gray-100">
-                  {transactions.map(tx => (
-                    <div key={tx.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
+                  {transactions.map(tx => <div key={tx.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center">
                           <div className={`
                             w-10 h-10 rounded-lg flex items-center justify-center text-lg
-                            ${tx.type === 'income' ? 'bg-green-100' : 
-                              tx.type === 'shopping' ? 'bg-blue-100' : 
-                              tx.type === 'subscription' ? 'bg-blue-100' :
-                              tx.type === 'food' ? 'bg-yellow-100' : 'bg-gray-100'}
+                            ${tx.type === 'income' ? 'bg-green-100' : tx.type === 'shopping' ? 'bg-blue-100' : tx.type === 'subscription' ? 'bg-blue-100' : tx.type === 'food' ? 'bg-yellow-100' : 'bg-gray-100'}
                           `}>
                             {tx.icon}
                           </div>
@@ -547,8 +473,7 @@ const Dashboard = () => {
                           {tx.amount}
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
               <CardFooter className="flex justify-center">
@@ -561,25 +486,20 @@ const Dashboard = () => {
           </div>
         </main>
       </div>
-    </div>
-  );
+    </div>;
 };
 
 // SidebarItem Component
-const SidebarItem = ({ icon, label, active = false }) => {
-  return (
-    <a
-      href="#"
-      className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
-        active ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'
-      }`}
-    >
+const SidebarItem = ({
+  icon,
+  label,
+  active = false
+}) => {
+  return <a href="#" className={`flex items-center px-4 py-3 rounded-lg transition-colors ${active ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}>
       <div className={`mr-3 ${active ? 'text-white' : 'text-gray-500'}`}>
         {icon}
       </div>
       <span className={`${active ? 'font-medium' : ''}`}>{label}</span>
-    </a>
-  );
+    </a>;
 };
-
 export default Dashboard;
