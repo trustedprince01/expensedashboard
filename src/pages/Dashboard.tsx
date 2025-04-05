@@ -13,9 +13,11 @@ import {
   BarChart2, 
   Repeat, 
   User, 
-  LifeBuoy, 
+  MessageSquare, 
   Settings,
-  Calendar
+  Calendar,
+  LogOut,
+  X
 } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import {
@@ -43,6 +45,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Progress } from "@/components/ui/progress";
 
 // Sample data for charts
 const moneyFlowData = [
@@ -139,6 +142,7 @@ const chartConfig = {
 const Dashboard = () => {
   const [timeFilter, setTimeFilter] = useState("30days");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dismissUsedSpace, setDismissUsedSpace] = useState(false);
   
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
@@ -163,32 +167,73 @@ const Dashboard = () => {
       </div>
 
       {/* Sidebar */}
-      <div className={`${menuOpen ? 'block' : 'hidden'} md:block w-full md:w-72 bg-white border-r border-gray-200 fixed md:static top-16 left-0 h-screen md:h-auto z-50`}>
-        <div className="p-6">
-          <div className="flex items-center mb-12 hidden md:flex">
-            <span className="text-blue-600 font-bold text-2xl">PRINCE</span>
-            <span className="text-gray-800 font-bold text-2xl">PAY</span>
+      <div className={`${menuOpen ? 'block' : 'hidden'} md:block w-full md:w-72 bg-white border-r border-gray-200 fixed md:static top-16 left-0 h-screen md:h-auto z-50 flex flex-col`}>
+        <div className="p-6 flex-1">
+          <div className="flex items-center mb-10 justify-center md:justify-start">
+            <span className="font-bold text-2xl italic">PRINCEPAY</span>
           </div>
           
-          <nav className="space-y-1">
-            <SidebarItem icon={<Home />} label="Dashboard" active />
-            <SidebarItem icon={<BarChart2 />} label="Report" />
-            <SidebarItem icon={<Repeat />} label="Transaction" />
-            <SidebarItem icon={<User />} label="Account" />
-            <SidebarItem icon={<CreditCard />} label="Card" />
-            <SidebarItem icon={<LifeBuoy />} label="Support" />
-            <SidebarItem icon={<Settings />} label="Settings" />
+          <nav className="space-y-2">
+            {/* Top menu items */}
+            <SidebarItem icon={<Home size={20} />} label="Dashboard" active />
+            <SidebarItem icon={<BarChart2 size={20} />} label="Report" />
+            <SidebarItem icon={<Repeat size={20} />} label="Transaction" />
+            <SidebarItem icon={<User size={20} />} label="Account" />
+            <SidebarItem icon={<CreditCard size={20} />} label="Card" />
+            
+            {/* Bottom menu items - added spacing */}
+            <div className="mt-10">
+              <SidebarItem icon={<MessageSquare size={20} />} label="Support" />
+              <SidebarItem icon={<Settings size={20} />} label="Settings" />
+            </div>
           </nav>
         </div>
         
-        <div className="mt-auto p-6">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-400 rounded-xl p-4 text-white">
-            <h3 className="font-medium text-sm">Need Help?</h3>
-            <p className="text-xs mt-1 mb-3 opacity-80">Contact our 24/7 customer support</p>
-            <button className="bg-white text-blue-600 text-xs rounded-lg px-4 py-2 font-medium hover:bg-blue-50 transition-colors">
-              Contact Us
-            </button>
+        {/* Used Space Section */}
+        {!dismissUsedSpace && (
+          <div className="px-6 mb-4">
+            <div className="bg-blue-600 rounded-xl p-4 text-white relative">
+              <button 
+                onClick={() => setDismissUsedSpace(true)}
+                className="absolute top-3 right-3 text-white/80 hover:text-white"
+              >
+                <X size={16} />
+              </button>
+              <h3 className="font-semibold text-lg mb-1">Used Space</h3>
+              <p className="text-sm mb-2 text-blue-100">
+                Your team have used 80% of your available space. want more?
+              </p>
+              <Progress value={80} className="h-1.5 bg-blue-400/50" />
+              <div className="flex justify-between mt-3">
+                <button className="text-sm text-blue-200 hover:text-white transition-colors">
+                  Dismiss
+                </button>
+                <button className="text-sm font-medium hover:underline">
+                  Upgrade plan
+                </button>
+              </div>
+            </div>
           </div>
+        )}
+        
+        {/* User Profile Section */}
+        <div className="border-t border-gray-200 p-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <Avatar className="h-10 w-10 border-2 border-gray-200">
+              <AvatarImage 
+                src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
+                alt="Profile" 
+              />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            <div className="ml-3">
+              <p className="text-sm font-medium text-gray-800">Upgrade plan</p>
+              <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
+            </div>
+          </div>
+          <button className="text-gray-500 hover:text-gray-700 transition-colors">
+            <LogOut size={18} />
+          </button>
         </div>
       </div>
 
@@ -212,7 +257,7 @@ const Dashboard = () => {
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>
               <div className="flex items-center">
-                <Avatar className="h-10 w-10">
+                <Avatar className="h-10 w-10 border-2 border-gray-200">
                   <AvatarImage 
                     src="https://cdn.gpteng.co/lovable-storage/zadaaanjsmvl0/1mrccCUD_UfGQcwWDGyzk.png" 
                     alt="Profile" 
@@ -412,7 +457,7 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            {/* Money Flow */}
+            {/* Money Flow - Improved Responsiveness */}
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader className="flex justify-between items-center">
                 <h3 className="font-medium">Money Flow</h3>
@@ -427,17 +472,46 @@ const Dashboard = () => {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <ChartContainer config={chartConfig} className="h-72">
-                  <BarChart data={moneyFlowData}>
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} />
-                    <YAxis axisLine={false} tickLine={false} />
+              <CardContent className="h-[300px] sm:h-[350px] md:h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={moneyFlowData} margin={{ top: 20, right: 10, left: 0, bottom: 5 }}>
                     <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="income" name="income" fill="#1EAEDB" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="expenses" name="expenses" fill="#33C3F0" radius={[4, 4, 0, 0]} />
+                    <XAxis 
+                      dataKey="name" 
+                      axisLine={false} 
+                      tickLine={false}
+                      tick={{ fontSize: 12 }}
+                      dy={10}
+                    />
+                    <YAxis 
+                      axisLine={false} 
+                      tickLine={false}
+                      tick={{ fontSize: 12 }}
+                      width={40}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        borderRadius: '8px', 
+                        border: '1px solid #f0f0f0',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+                      }} 
+                    />
+                    <Bar 
+                      dataKey="income" 
+                      name="Income" 
+                      fill="#1EAEDB" 
+                      radius={[4, 4, 0, 0]}
+                      barSize={window.innerWidth < 640 ? 15 : 30}
+                    />
+                    <Bar 
+                      dataKey="expenses" 
+                      name="Expenses" 
+                      fill="#33C3F0" 
+                      radius={[4, 4, 0, 0]}
+                      barSize={window.innerWidth < 640 ? 15 : 30}
+                    />
                   </BarChart>
-                </ChartContainer>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
 
@@ -495,14 +569,13 @@ const SidebarItem = ({ icon, label, active = false }) => {
     <a
       href="#"
       className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
-        active ? 'bg-blue-100 text-blue-700' : 'text-gray-500 hover:bg-gray-100'
+        active ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'
       }`}
     >
-      <div className={`mr-3 ${active ? 'text-blue-700' : 'text-gray-500'}`}>
+      <div className={`mr-3 ${active ? 'text-white' : 'text-gray-500'}`}>
         {icon}
       </div>
-      <span className={active ? 'font-medium' : ''}>{label}</span>
-      {active && <div className="ml-auto w-1.5 h-6 bg-blue-600 rounded-full"></div>}
+      <span className={`${active ? 'font-medium' : ''}`}>{label}</span>
     </a>
   );
 };
