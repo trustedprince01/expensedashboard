@@ -173,7 +173,7 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        <div className="mt-auto p-6 px-[24px] mx-0 my-[40px] py-[10px]">
+        <div className="mt-auto p-6 px-[24px] mx-0 my-[140px] py-[100px]">
           {!dismissUsedSpace && <div className="mb-4">
               <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
@@ -203,7 +203,7 @@ const Dashboard = () => {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-800">Chibuzor prince</p>
+                  <p className="text-sm font-medium text-gray-800">John Doe</p>
                   <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
                 </div>
               </div>
@@ -215,7 +215,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto py-0">
+      <div className="flex-1 overflow-y-auto">
         <header className="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="relative w-full md:w-64">
@@ -304,7 +304,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40 my-0 py-0"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_70%)] opacity-40 my-0"></div>
                 
                 <div className="mt-14 flex justify-between items-center pt-4">
                   <p className="font-medium tracking-wider text-white text-lg">5282 3456 7890 1289</p>
