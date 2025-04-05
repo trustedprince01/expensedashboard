@@ -173,7 +173,7 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        <div className="mt-auto p-6 px-[24px] mx-0 py-[40px] my-[240px]">
+        <div className="mt-auto p-6 py-[240px] px-[24px] mx-0 my-[140px]">
           {!dismissUsedSpace && <div className="mb-4">
               <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
@@ -203,7 +203,7 @@ const Dashboard = () => {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-800">John Doe</p>
+                  <p className="text-sm font-medium text-gray-800">Chibuzor prince</p>
                   <p className="text-xs text-gray-500">chibuzorprince68@gmail.com</p>
                 </div>
               </div>
