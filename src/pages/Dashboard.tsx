@@ -234,7 +234,7 @@ const Dashboard = () => {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="ml-3 hidden md:block">
-                  <p className="text-sm font-medium text-gray-800">John Doe</p>
+                  <p className="text-sm font-medium text-gray-800">Prince Design</p>
                   <p className="text-xs text-gray-500">Premium User</p>
                 </div>
                 <ChevronDown className="h-4 w-4 text-gray-600 ml-2" />
