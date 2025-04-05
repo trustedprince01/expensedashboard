@@ -245,7 +245,7 @@ const Dashboard = () => {
         
         <main className="p-4 md:p-6">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">Hello, John! 👋</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Hello, Prince! 👋</h1>
             <p className="text-gray-500">Welcome back to your dashboard</p>
           </div>
           
