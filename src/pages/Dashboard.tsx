@@ -173,7 +173,7 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        <div className="mt-auto p-6 px-[24px] mx-0 py-[100px] my-[240px]">
+        <div className="mt-auto p-6 px-[24px] mx-0 my-[40px] py-[10px]">
           {!dismissUsedSpace && <div className="mb-4">
               <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
