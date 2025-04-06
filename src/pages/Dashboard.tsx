@@ -296,7 +296,7 @@ const Dashboard = () => {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-sm opacity-80">Current Balance</p>
-                    <h2 className="text-4xl font-bold mt-2">$5,750.20</h2>
+                    <h2 className="text-4xl font-bold mt-10">$5,750.20</h2>
                   </div>
                   <div className="flex -space-x-2">
                     <div className="bg-red-500 rounded-full w-8 h-8 opacity-90"></div>
