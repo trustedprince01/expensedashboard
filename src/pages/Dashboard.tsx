@@ -175,7 +175,7 @@ const Dashboard = () => {
         
         <div className="mt-auto p-6 mx-0 py-[140px] px-[12px] my-0">
           {!dismissUsedSpace && <div className="mb-4 my-[218px]">
-              <div className="bg-blue-600 rounded-xl p-4 text-white relative">
+              <div className="bg-blue-600 rounded-xl p-4 text-white relative my-0">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
                   <X size={16} />
                 </button>
@@ -195,7 +195,7 @@ const Dashboard = () => {
               </div>
             </div>}
           
-          <div className="border-t border-gray-200 pt-4 mt-4 py-px my-[6px]">
+          <div className="border-t border-gray-200 pt-4 mt-4 py-px my-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Avatar className="h-10 w-10 border-2 border-gray-200">
