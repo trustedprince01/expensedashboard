@@ -215,7 +215,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto my-0 py-0 px-0 mx-0">
+      <div className="flex-1 overflow-y-auto">
         <header className="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="relative w-full md:w-64">
