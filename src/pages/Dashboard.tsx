@@ -173,7 +173,7 @@ const Dashboard = () => {
           </nav>
         </div>
         
-        <div className="mt-auto p-6 px-[24px] mx-0 py-[140px] my-[205px]">
+        <div className="mt-auto p-6 px-[24px] mx-0 py-[140px] my-[213px]">
           {!dismissUsedSpace && <div className="mb-4">
               <div className="bg-blue-600 rounded-xl p-4 text-white relative">
                 <button onClick={() => setDismissUsedSpace(true)} className="absolute top-3 right-3 text-white/80 hover:text-white">
@@ -215,7 +215,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto my-0 py-0 px-0 mx-0">
         <header className="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="relative w-full md:w-64">
